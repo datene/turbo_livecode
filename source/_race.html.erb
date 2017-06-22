@@ -1,16 +1,34 @@
-
 <h1 class="text-center">Wagon Race</h1>
-<h2 id="team-name-1">
-  
-</h2>
-<h2 id="team-name-2">
-  
-</h2>
-<h2 id="team-name-3">
-  
-</h2>
-<table class="racer_table">
-  <tr id="player1_race">
+<div class="team-controls" data-team="0">
+  <h2 class="team-name"></h2>
+  <div class="team-score">
+    <span class="score"></span>
+    <span class="score-controls">
+      <span class="score-up">+</span>
+      <span class="score-down">-</span>
+    </span>
+  </div>
+</div>
+
+<div class="team-controls" data-team="1">
+  <h2 class="team-name"></h2>
+  <div class="team-score">
+    <span class="score"></span>
+    <span class="score-controls">
+      <span class="score-up">+</span>
+      <span class="score-down">-</span>
+    </span>
+  </div>
+</div>
+
+<div class="race-controls">
+  <div class="timer">
+    10 min
+  </div>
+</div>
+
+<table class="racer-table">
+  <tr class="player" data-team="0">
     <td class="active"></td>
     <td></td>
     <td></td>
@@ -95,7 +113,7 @@
       <hr>
     </td>
   </tr>
-  <tr id="player2_race">
+  <tr class="player" data-team="1">
     <td class="active"></td>
     <td></td>
     <td></td>
@@ -180,7 +198,7 @@
       <hr>
     </td>
   </tr>
-  <tr id="player3_race">
+  <tr data-team="2">
     <td class="active"></td>
     <td></td>
     <td></td>
