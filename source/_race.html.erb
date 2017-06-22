@@ -1,4 +1,15 @@
 <h1 class="text-center">Turbo Livecode</h1>
+
+<div id="timer">
+    <div id="inputArea" style= "display: block">
+        <input type="text" id="minutes" placeholder= "minutes">
+        <input type="button" value= "let's go!" onclick="startCountdown()">
+    </div>
+    <h1 id="time"> 0:00</h1>
+    <p id="reset" style= "display: none" onclick="resetPage()">↺</p>
+</div>
+
+
 <div class="full-controls">
   <div class="team-controls" data-team="0">
     <h2 class="team-name"></h2>

@@ -45,7 +45,7 @@ $(document).ready(function() {
   function playVideo(type, callback) {
     var randomIndex = Math.floor(Math.random() * 4);
     var videoPath = VIDEOS[type][randomIndex];
-    
+
     var source = $('<video width="320" height="240" autoplay>' +
                    '<source src="' + videoPath + '" type="video/mp4">' +
                    '</video>');
@@ -55,10 +55,10 @@ $(document).ready(function() {
 
     $video.html(source);
 
-    setTimeout(function() {
+    source.on('ended', function(e) {
       $video.html('');
       $video.hide();
-    }, 1500);
+    });
     callback();
   }
   // STEPS CREATION
@@ -75,7 +75,7 @@ $(document).ready(function() {
   });
 
   function createStep(step) {
-    DB.steps.push(step)    
+    DB.steps.push(step)
   }
 
   function displaySteps() {
@@ -148,4 +148,81 @@ $(document).ready(function() {
 
 });
 
+
+// TIMER /////
+var playing = false
+
+var secondsRemaining;
+var intervalHandle;
+
+function resetPage(){
+    document.getElementById("inputArea").style.display = "block";
+    playing = false
+}
+
+function tick(){
+    // grab the h1
+    var timeDisplay = document.getElementById("time");
+
+    // turn the seconds into mm:ss
+    var min = Math.floor(secondsRemaining / 60);
+    var sec = secondsRemaining - (min * 60);
+
+    //add a leading zero (as a string value) if seconds less than 10
+    if (sec < 10) {
+        sec = "0" + sec;
+    }
+
+    // concatenate with colon
+    var message = min.toString() + ":" + sec;
+
+    // now change the display
+    timeDisplay.innerHTML = message;
+
+    // stop is down to zero
+    if (secondsRemaining <= 0){
+        playing = false
+
+        timeDisplay.innerHTML = "TIME'S UP!";
+        document.getElementById("reset").style.display = "block"
+        clearInterval(intervalHandle)
+        //resetPage();
+    }
+
+    //subtract from seconds remaining
+    secondsRemaining--;
+
+}
+
+function startCountdown(){
+
+    // function resetPage(){
+    //     document.getElementById("inputArea").style.display = "block";
+    // }
+
+
+
+    // get the minutes
+    var minutes = document.getElementById("minutes").value;
+    
+    // check if not a number
+    if (isNaN(minutes)){
+        alert("Please enter a number");
+        return; // stops function if true
+    }
+
+    // how many seconds
+    secondsRemaining = minutes * 60;
+    
+    if (playing = true) {
+    //every second, call the "tick" function
+    intervalHandle = setInterval(tick, 1000);
+        
+    }
+
+    // hide the form
+    document.getElementById("inputArea").style.display = "none";
+
+
+}
 
