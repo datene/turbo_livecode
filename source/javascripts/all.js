@@ -3,13 +3,17 @@
 //= require_tree .
 
 // DB
+var VIDEOS = {
+  positive: ["videos/positive_0.mp4", "videos/positive_1.mp4", "videos/positive_2.mp4", "videos/positive_3.mp4", "videos/positive_4.mp4"],
+  negative: ["videos/negative_0.mp4", "videos/negative_1.mp4", "videos/negative_2.mp4", "videos/negative_3.mp4", "videos/negative_4.mp4"]
+};
+
 var DB = {
   teams: [],
   steps: []
 };
 
 // ?
-
 $(document).on('click', function(e){
   if (e.target.matches('.step-item')) {
     e.target.remove();
@@ -36,6 +40,27 @@ $(document).ready(function() {
     $track.find("td.active").last().removeClass('active');
   }
 
+  // PLAY VIDEO
+
+  function playVideo(type, callback) {
+    var randomIndex = Math.floor(Math.random() * 4);
+    var videoPath = VIDEOS[type][randomIndex];
+    
+    var source = $('<video width="320" height="240" autoplay>' +
+                   '<source src="' + videoPath + '" type="video/mp4">' +
+                   '</video>');
+    var $video = $(".video-container");
+
+    $video.show();
+
+    $video.html(source);
+
+    setTimeout(function() {
+      $video.html('');
+      $video.hide();
+    }, 1500);
+    callback();
+  }
   // STEPS CREATION
 
   $('#step-creation').on('submit', function(event){
@@ -96,7 +121,9 @@ $(document).ready(function() {
     var team = DB.teams[teamId];
     team.score += 1;
     displayTeams();
-    moveForward(teamId);
+    playVideo('positive', function() {
+      moveForward(teamId);
+    });
   });
 
   $(".team-controls .score-down").on("click", function() {
@@ -104,7 +131,9 @@ $(document).ready(function() {
     var team = DB.teams[teamId];
     team.score -= 1;
     displayTeams();
-    moveBackward(teamId);
+    playVideo('negative', function() {
+      moveBackward(teamId);
+    });
   });
 
 
