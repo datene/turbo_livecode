@@ -1,0 +1,12 @@
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#team-creation, #step-creation {
+  display: flex;
+  flex-direction: column;
+}
