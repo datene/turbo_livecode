@@ -46,9 +46,3 @@
 
 - Go the URL given by your Teacher
 - Let's code step by step
-
-
-# Grading system
-
-+1 if step is finished
--1 if other team find a bug during code review
