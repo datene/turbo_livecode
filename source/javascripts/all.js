@@ -45,7 +45,7 @@ $(document).ready(function() {
   function playVideo(type, callback) {
     var randomIndex = Math.floor(Math.random() * 4);
     var videoPath = VIDEOS[type][randomIndex];
-    
+
     var source = $('<video width="320" height="240" autoplay>' +
                    '<source src="' + videoPath + '" type="video/mp4">' +
                    '</video>');
@@ -55,10 +55,10 @@ $(document).ready(function() {
 
     $video.html(source);
 
-    setTimeout(function() {
+    source.on('ended', function(e) {
       $video.html('');
       $video.hide();
-    }, 1500);
+    });
     callback();
   }
   // STEPS CREATION
@@ -75,7 +75,7 @@ $(document).ready(function() {
   });
 
   function createStep(step) {
-    DB.steps.push(step)    
+    DB.steps.push(step)
   }
 
   function displaySteps() {
